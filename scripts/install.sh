@@ -81,8 +81,9 @@ trap install_success EXIT
 
 configure_systemd() {
     if ! id ollama >/dev/null 2>&1; then
-        status "Creating ollama user..."
-        $SUDO useradd -r -s /bin/false -m -d /usr/share/ollama ollama
+	# FIX: Create ollama in home instead
+        status "Creating ollama user in home..."
+        $SUDO useradd -r -s /bin/false -m -d /home/ollama ollama
     fi
     if getent group render >/dev/null 2>&1; then
         status "Adding ollama user to render group..."
